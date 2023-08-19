@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
+Route::get('/single', [FrontendController::class, 'single'])->name('frontend.single');
+
+Route::group(['prefix' => 'dashboard'], function() {
+    
+    Route::get('/', [BackendController::class, 'index'])->name('frontend.index');
+
 });
